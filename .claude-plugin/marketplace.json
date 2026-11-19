@@ -1,0 +1,7 @@
+{
+  "name": "local-mods",
+  "owner": { "name": "mahboob" },
+  "plugins": [
+    { "name": "copy-summary", "source": "./mods/copy-summary", "description": "Readable output style plus auto-copied plain-text summary after tool work." }
+  ]
+}
