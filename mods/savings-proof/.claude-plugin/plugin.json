@@ -1,0 +1,7 @@
+{
+  "name": "savings-proof",
+  "version": "0.1.0",
+  "description": "Reads the pack's ledger and reports tokens saved net of helper cost and of re-reads.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" }
+}
