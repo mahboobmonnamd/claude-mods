@@ -1,0 +1,7 @@
+{
+  "name": "model-router",
+  "version": "0.1.0",
+  "description": "Picks the model for each subagent with a Haiku judge. Cheaper models need high confidence; risky tasks are sent to the deepest model.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" }
+}

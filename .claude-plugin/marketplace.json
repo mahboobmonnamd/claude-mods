@@ -1,7 +1,59 @@
 {
-  "name": "local-mods",
-  "owner": { "name": "mahboob" },
+  "name": "claude-mods",
+  "owner": {
+    "name": "mahboob"
+  },
+  "description": "Claude Code mods by mahboob: output helpers and a token-saving pack.",
   "plugins": [
-    { "name": "copy-summary", "source": "./mods/copy-summary", "description": "Readable output style plus auto-copied plain-text summary after tool work." }
+    {
+      "name": "copy-summary",
+      "source": "./mods/copy-summary",
+      "description": "Readable output style plus auto-copied plain-text summary after tool work."
+    },
+    {
+      "name": "input-router",
+      "source": "./mods/input-router",
+      "description": "Routes big file, shell and connector output through Haiku so only notes reach the chat."
+    },
+    {
+      "name": "effort-optimizer",
+      "source": "./mods/effort-optimizer",
+      "description": "Suggests or sets reasoning effort per prompt; most prompts are decided locally."
+    },
+    {
+      "name": "model-router",
+      "source": "./mods/model-router",
+      "description": "Picks each subagent's model with a Haiku judge and confidence bars."
+    },
+    {
+      "name": "cache-clock",
+      "source": "./mods/cache-clock",
+      "description": "Prompt cache countdown and a keep-warm that stops at break-even."
+    },
+    {
+      "name": "handoff",
+      "source": "./mods/handoff",
+      "description": "Writes, saves and copies a handoff of a long chat."
+    },
+    {
+      "name": "research-router",
+      "source": "./mods/research-router",
+      "description": "Shortens big web results, keeping sources and dates."
+    },
+    {
+      "name": "browser-shrink",
+      "source": "./mods/browser-shrink",
+      "description": "Shrinks browser screenshots with sips (macOS)."
+    },
+    {
+      "name": "mods",
+      "source": "./mods/switchboard",
+      "description": "/mods switchboard for the token-saving pack."
+    },
+    {
+      "name": "savings-proof",
+      "source": "./mods/savings-proof",
+      "description": "/savings: tokens saved net of re-reads, with helper cost."
+    }
   ]
 }

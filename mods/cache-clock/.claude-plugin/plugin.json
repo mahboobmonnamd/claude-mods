@@ -1,0 +1,7 @@
+{
+  "name": "cache-clock",
+  "version": "0.1.0",
+  "description": "Counts down to the prompt cache going cold in the status line, and can ping it to keep it warm only while that costs less than a cold restart.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" }
+}
