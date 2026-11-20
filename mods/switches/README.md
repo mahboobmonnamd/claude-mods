@@ -1,6 +1,6 @@
 # switches
 
-Turns each plugin of the Lean pack on or off in every chat. Switches live in ~/.claude/token-mods/switches.json and are read on demand.
+Turns each plugin of the token-saving pack on or off in every chat. Switches live in ~/.claude/token-mods/switches.json and are read on demand.
 
 Command: `/switches, /switches off <name>, /switches on <name>`
 
@@ -11,4 +11,4 @@ Command: `/switches, /switches off <name>, /switches on <name>`
 /plugin install switches@claude-mods
 ```
 
-Part of the Lean pack; see the repo README.
+Part of the token-saving pack; see the repo README.

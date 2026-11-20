@@ -11,4 +11,4 @@ Command: `/effort-tuner off|suggest|auto`
 /plugin install effort-tuner@claude-mods
 ```
 
-Part of the Lean pack; see the repo README.
+Part of the token-saving pack; see the repo README.

@@ -11,4 +11,4 @@ Command: `/handoff, /handoff nudge <tokens>`
 /plugin install chat-handoff@claude-mods
 ```
 
-Part of the Lean pack; see the repo README.
+Part of the token-saving pack; see the repo README.

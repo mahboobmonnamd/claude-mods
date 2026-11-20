@@ -1,7 +1,7 @@
 {
   "name": "mahboobmonnamd",
   "version": "0.1.0",
-  "description": "The Lean token-saving pack: installs every Lean plugin in one step.",
+  "description": "The token-saving pack: installs every plugin of the pack in one step.",
   "license": "MIT",
   "author": {
     "name": "mahboobmonnamd"

@@ -11,4 +11,4 @@ Command: `/trim-shots, /trim-shots full`
 /plugin install trim-shots@claude-mods
 ```
 
-Part of the Lean pack; see the repo README.
+Part of the token-saving pack; see the repo README.

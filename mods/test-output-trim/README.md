@@ -11,4 +11,4 @@ Command: `/test-output-trim`. Extra commands to match can be set in the plugin's
 /plugin install test-output-trim@claude-mods
 ```
 
-Part of the Lean pack; see the repo README.
+Part of the token-saving pack; see the repo README.

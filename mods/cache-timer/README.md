@@ -11,4 +11,4 @@ Command: `/cache-timer ttl 5m|1h, /cache-timer warm on|off`
 /plugin install cache-timer@claude-mods
 ```
 
-Part of the Lean pack; see the repo README.
+Part of the token-saving pack; see the repo README.

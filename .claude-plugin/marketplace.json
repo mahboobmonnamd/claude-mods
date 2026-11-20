@@ -3,7 +3,7 @@
   "owner": {
     "name": "mahboob"
   },
-  "description": "Claude Code mods by mahboob: output helpers and the Lean token-saving pack.",
+  "description": "Claude Code mods by mahboob: output helpers and the token-saving pack.",
   "plugins": [
     {
       "name": "copy-summary",
@@ -48,7 +48,7 @@
     {
       "name": "switches",
       "source": "./mods/switches",
-      "description": "/switches panel for the Lean pack."
+      "description": "/switches panel for the token-saving pack."
     },
     {
       "name": "savings-meter",
@@ -73,7 +73,7 @@
     {
       "name": "mahboobmonnamd",
       "source": "./mods/mahboobmonnamd",
-      "description": "Installs the whole Lean pack in one step."
+      "description": "Installs the whole token-saving pack in one step."
     }
   ]
 }
