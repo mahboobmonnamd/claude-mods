@@ -1,0 +1,23 @@
+{
+  "name": "lean",
+  "version": "0.1.0",
+  "description": "The Lean token-saving pack: installs every Lean plugin in one step.",
+  "license": "MIT",
+  "author": {
+    "name": "mahboobmonnamd"
+  },
+  "dependencies": [
+    "trim-output",
+    "trim-web",
+    "trim-shots",
+    "effort-tuner",
+    "agent-model-picker",
+    "cache-timer",
+    "chat-handoff",
+    "switches",
+    "savings-meter",
+    "dedupe-reads",
+    "test-output-trim",
+    "cost-ledger"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "trim-shots",
+  "version": "0.1.0",
+  "description": "Shrinks screenshots from browser tools with sips before they reach the model.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" }
+}

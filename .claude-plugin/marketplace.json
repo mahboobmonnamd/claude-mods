@@ -3,7 +3,7 @@
   "owner": {
     "name": "mahboob"
   },
-  "description": "Claude Code mods by mahboob: output helpers and a token-saving pack.",
+  "description": "Claude Code mods by mahboob: output helpers and the Lean token-saving pack.",
   "plugins": [
     {
       "name": "copy-summary",
@@ -11,49 +11,69 @@
       "description": "Readable output style plus auto-copied plain-text summary after tool work."
     },
     {
-      "name": "input-router",
-      "source": "./mods/input-router",
-      "description": "Routes big file, shell and connector output through Haiku so only notes reach the chat."
+      "name": "trim-output",
+      "source": "./mods/trim-output",
+      "description": "Trims big file, shell and connector output (Haiku notes after a free pre-filter)."
     },
     {
-      "name": "effort-optimizer",
-      "source": "./mods/effort-optimizer",
-      "description": "Suggests or sets reasoning effort per prompt; most prompts are decided locally."
+      "name": "effort-tuner",
+      "source": "./mods/effort-tuner",
+      "description": "Picks the reasoning effort per prompt; most prompts decided locally."
     },
     {
-      "name": "model-router",
-      "source": "./mods/model-router",
+      "name": "agent-model-picker",
+      "source": "./mods/agent-model-picker",
       "description": "Picks each subagent's model with a Haiku judge and confidence bars."
     },
     {
-      "name": "cache-clock",
-      "source": "./mods/cache-clock",
+      "name": "cache-timer",
+      "source": "./mods/cache-timer",
       "description": "Prompt cache countdown and a keep-warm that stops at break-even."
     },
     {
-      "name": "handoff",
-      "source": "./mods/handoff",
+      "name": "chat-handoff",
+      "source": "./mods/chat-handoff",
       "description": "Writes, saves and copies a handoff of a long chat."
     },
     {
-      "name": "research-router",
-      "source": "./mods/research-router",
+      "name": "trim-web",
+      "source": "./mods/trim-web",
       "description": "Shortens big web results, keeping sources and dates."
     },
     {
-      "name": "browser-shrink",
-      "source": "./mods/browser-shrink",
+      "name": "trim-shots",
+      "source": "./mods/trim-shots",
       "description": "Shrinks browser screenshots with sips (macOS)."
     },
     {
-      "name": "mods",
-      "source": "./mods/switchboard",
-      "description": "/mods switchboard for the token-saving pack."
+      "name": "switches",
+      "source": "./mods/switches",
+      "description": "/switches panel for the Lean pack."
     },
     {
-      "name": "savings-proof",
-      "source": "./mods/savings-proof",
+      "name": "savings-meter",
+      "source": "./mods/savings-meter",
       "description": "/savings: tokens saved net of re-reads, with helper cost."
+    },
+    {
+      "name": "dedupe-reads",
+      "source": "./mods/dedupe-reads",
+      "description": "Replaces an unchanged repeat file read with a one-line pointer."
+    },
+    {
+      "name": "test-output-trim",
+      "source": "./mods/test-output-trim",
+      "description": "Cuts long test runs to failures and summary; the full log is saved to disk. No model call."
+    },
+    {
+      "name": "cost-ledger",
+      "source": "./mods/cost-ledger",
+      "description": "Side pane over the savings ledger: net savings, helper cost, by plugin."
+    },
+    {
+      "name": "lean",
+      "source": "./mods/lean",
+      "description": "Installs the whole Lean pack in one step."
     }
   ]
 }

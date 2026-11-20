@@ -1,7 +1,0 @@
-{
-  "name": "effort-optimizer",
-  "version": "0.1.0",
-  "description": "Suggests, or sets, the reasoning effort a prompt needs. Plain approvals and obviously hard work are decided locally; only ambiguous prompts cost a Haiku call.",
-  "license": "MIT",
-  "author": { "name": "mahboobmonnamd" }
-}

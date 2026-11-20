@@ -1,7 +1,0 @@
-{
-  "name": "handoff",
-  "version": "0.1.0",
-  "description": "Writes a handoff of a long chat, saves it, copies it, and nudges you at a context size you choose.",
-  "license": "MIT",
-  "author": { "name": "mahboobmonnamd" }
-}

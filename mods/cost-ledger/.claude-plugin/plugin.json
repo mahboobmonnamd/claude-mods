@@ -1,0 +1,8 @@
+{
+  "name": "cost-ledger",
+  "version": "0.1.0",
+  "description": "A side pane over the token-saving ledger: savings net of re-reads, helper cost, by plugin, and the latest actions.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" },
+  "types": "./types/index.d.ts"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "dedupe-reads",
+  "version": "0.1.0",
+  "description": "Replaces a file read that is identical to an earlier read in the same chat with a one-line pointer, so the same text is not paid for twice.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" }
+}

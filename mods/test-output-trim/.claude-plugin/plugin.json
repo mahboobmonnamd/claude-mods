@@ -1,0 +1,15 @@
+{
+  "name": "test-output-trim",
+  "version": "0.1.0",
+  "description": "Keeps the failures and the summary of long test-run output, saves the full log to disk, and costs no model call.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" },
+  "userConfig": {
+    "extraPattern": {
+      "type": "string",
+      "title": "Extra test commands",
+      "description": "Optional regular expression matched against Bash commands, on top of the built-in test runners (npm test, pytest, go test, cargo test, jest, vitest...).",
+      "default": ""
+    }
+  }
+}

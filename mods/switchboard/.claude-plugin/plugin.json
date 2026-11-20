@@ -1,7 +1,0 @@
-{
-  "name": "mods",
-  "version": "0.1.0",
-  "description": "A /mods switchboard: turn each plugin of this pack on or off, with no polling.",
-  "license": "MIT",
-  "author": { "name": "mahboobmonnamd" }
-}

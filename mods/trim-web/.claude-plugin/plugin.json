@@ -1,0 +1,7 @@
+{
+  "name": "trim-web",
+  "version": "0.1.0",
+  "description": "Shortens large web search and fetch results with Haiku, keeping sources and dates, so research does not fill the main chat.",
+  "license": "MIT",
+  "author": { "name": "mahboobmonnamd" }
+}

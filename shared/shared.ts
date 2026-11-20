@@ -57,6 +57,50 @@ export async function ledger($: EngineInterface, row: LedgerRow): Promise<void> 
   }
 }
 
+export type LedgerEntry = LedgerRow & { t: number }
+
+/** Every readable row of the ledger; a damaged line is skipped, never fatal. */
+export async function loadLedger($: EngineInterface): Promise<LedgerEntry[]> {
+  const file = `${await dataDir($)}/ledger.jsonl`
+  if (!(await $.fs.exists(file))) return []
+  const rows: LedgerEntry[] = []
+  for (const line of String(await $.fs.read(file)).split('\n')) {
+    if (!line.trim()) continue
+    try {
+      const r = JSON.parse(line) as LedgerEntry
+      if (typeof r.t === 'number' && typeof r.mod === 'string' && typeof r.kind === 'string') rows.push(r)
+    } catch {
+      // skipped
+    }
+  }
+  return rows
+}
+
+export type Tally = { routed: number; gross: number; reread: number; helperIn: number; helperOut: number; rerouted: number }
+
+// A route whose source was read again afterwards did not save what it claimed: Claude paid for the full text anyway.
+// Those savings are taken back, so the figure is net of the notes not being enough.
+export function tally(rows: LedgerEntry[]): Tally {
+  const reread = new Set(rows.filter(r => r.kind === 'reread').map(r => `${r.mod}\n${r.source}`))
+  const t: Tally = { routed: 0, gross: 0, reread: 0, helperIn: 0, helperOut: 0, rerouted: 0 }
+  for (const r of rows) {
+    if (r.helper) {
+      t.helperIn += r.helper.in
+      t.helperOut += r.helper.out
+    }
+    if (r.kind !== 'route') continue
+    t.routed += 1
+    const saved = (r.before ?? 0) - (r.after ?? 0)
+    if (reread.has(`${r.mod}\n${r.source}`)) {
+      t.rerouted += 1
+      t.reread += saved
+    } else {
+      t.gross += saved
+    }
+  }
+  return t
+}
+
 // <data>/switches.json is {"<plugin>": false} to turn one off; the /mods command writes it.
 // Read on demand and cached for a few seconds, so nothing polls.
 let cached: { at: number; map: Record<string, boolean> } | undefined
