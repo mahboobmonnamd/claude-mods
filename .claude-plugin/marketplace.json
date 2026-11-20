@@ -71,8 +71,8 @@
       "description": "Side pane over the savings ledger: net savings, helper cost, by plugin."
     },
     {
-      "name": "lean",
-      "source": "./mods/lean",
+      "name": "mahboobmonnamd",
+      "source": "./mods/mahboobmonnamd",
       "description": "Installs the whole Lean pack in one step."
     }
   ]

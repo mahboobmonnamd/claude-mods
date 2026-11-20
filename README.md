@@ -12,7 +12,7 @@ Claude Code plugins by mahboob. Add the marketplace once, then install what you 
 Plugins that keep tokens out of the chat. Install them all with one command, or pick:
 
 ```
-/plugin install lean@claude-mods
+/plugin install mahboobmonnamd@claude-mods
 ```
 
 | Plugin | What it does | Command |
@@ -29,7 +29,7 @@ Plugins that keep tokens out of the chat. Install them all with one command, or 
 | `savings-meter` | Tokens saved this chat, today and all time, net of re-reads. | `/savings` |
 | `cost-ledger` | A side pane over the same ledger: by plugin, with the latest actions. | `/cost-ledger` |
 | `switches` | One panel to turn each Lean plugin on or off. | `/switches` |
-| `lean` | Installs all of the above. | |
+| `mahboobmonnamd` | Installs all of the above. | |
 
 ## Other plugins
 
