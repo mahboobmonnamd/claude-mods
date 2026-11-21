@@ -1,6 +1,7 @@
 import type { EngineInterface, Register } from 'claude-code'
 
 import { dataDir, estimate, fmt, isOn, ledger, short } from './shared.ts'
+import { writeFullTestLog } from './log.ts'
 
 const NAME = 'test-output-trim'
 // Under this a test run is small enough to read whole.
@@ -10,7 +11,6 @@ const KEEP_TAIL = 40
 const BEFORE = 2
 const AFTER = 8
 const MAX_KEPT_LINES = 300
-const KEEP_LOGS = 20
 
 const RUNNER =
   /\b(npm|pnpm|yarn|bun)\s+(run\s+)?(test|t)\b|\b(jest|vitest|mocha|pytest|py\.test|tox|nose2|phpunit|rspec|ctest)\b|\b(rake|mix|dotnet|swift|deno)\s+test\b|\bmvn\s+(-\S+\s+)?test\b|\bgradlew?\s+(\S+\s+)*test\b|\bgo\s+test\b|\bcargo\s+(nextest\s+run|test)\b|\bpython3?\s+-m\s+(pytest|unittest)\b|\bxcodebuild\b.*\btest\b/
@@ -53,17 +53,7 @@ export function trimTestOutput(output: string): Trimmed {
 }
 
 async function saveLog($: EngineInterface, text: string): Promise<string | undefined> {
-  try {
-    const file = `${await dataDir($)}/test-logs/${await $.clock.now()}.log`
-    // Newest 20 logs stay; a test log is only useful while the run is fresh.
-    await $.process.run(['/bin/sh', '-c', `d=$(dirname "$1"); mkdir -p "$d" && cat > "$1" && ls -t "$d"/*.log | tail -n +${KEEP_LOGS + 1} | xargs rm -f`, 'sh', file], {
-      stdin: text,
-      timeoutMs: 10_000,
-    })
-    return file
-  } catch {
-    return undefined
-  }
+  return writeFullTestLog(`${await dataDir($)}/test-logs`, text, (args, options) => $.process.run(args, options))
 }
 
 type Block = { type: string; text?: string; [k: string]: unknown }

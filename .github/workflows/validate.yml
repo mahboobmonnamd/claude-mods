@@ -1,0 +1,55 @@
+name: Validate Claude Mods
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Claude Code CLI
+        run: npm install --global @anthropic-ai/claude-code
+      - name: Version and synchronized helpers
+        run: |
+          claude --version
+          sh tools/sync-shared.sh --check
+      - name: Validate marketplace and plugin manifests
+        run: |
+          claude plugin validate .
+          for plugin in mods/*; do
+            claude plugin validate "$plugin"
+          done
+      - name: Smoke-test bundle and automatic dependencies
+        run: |
+          claude plugin marketplace add ./
+          claude plugin install mahboobmonnamd@claude-mods
+          claude plugin list --json > "$RUNNER_TEMP/plugins.json"
+          node - "$RUNNER_TEMP/plugins.json" <<'NODE'
+          const fs = require('node:fs')
+          const plugins = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))
+          const expected = [
+            'mahboobmonnamd', 'trim-output', 'trim-web', 'trim-shots',
+            'effort-tuner', 'agent-model-picker', 'cache-timer', 'chat-handoff',
+            'switches', 'savings-meter', 'dedupe-reads', 'test-output-trim', 'cost-ledger',
+          ]
+          const missing = expected.filter(name => !plugins.some(
+            p => p.id === name + '@claude-mods' && p.enabled && !(p.errors || []).length,
+          ))
+          if (missing.length) {
+            console.error('Bundle failed to install: ' + missing.join(', '))
+            process.exitCode = 1
+          }
+          NODE
+      - name: Run isolated mod regression tests
+        run: |
+          claude plugin test mods/trim-output
+          claude plugin test mods/test-output-trim
