@@ -30,7 +30,7 @@ jobs:
           done
       - name: Smoke-test bundle and automatic dependencies
         run: |
-          claude plugin marketplace add .
+          claude plugin marketplace add ./
           claude plugin install mahboobmonnamd@claude-mods
           claude plugin list --json > "$RUNNER_TEMP/plugins.json"
           node - "$RUNNER_TEMP/plugins.json" <<'NODE'
