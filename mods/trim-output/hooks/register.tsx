@@ -3,6 +3,7 @@ import type { Register } from 'claude-code'
 
 import type { RouterEntry, RouterSettings } from '../types'
 import { isOn, ledger, redact } from './shared.ts'
+import { matchesOutputTool } from './tool-policy.ts'
 
 const PANE = 'trim-output'
 const MAX_ENTRIES = 300
@@ -102,13 +103,6 @@ const prefilter = (text: string, extra: RegExp | null): string => {
 const estimate = (text: string) => Math.ceil(text.length / 4)
 const fmt = (n: number) => (n >= 10_000 ? `${(n / 1000).toFixed(1)}k` : String(Math.round(n)))
 const short = (text: string, n: number) => (text.length > n ? `${text.slice(0, n - 1)}…` : text)
-
-const matchesTool = (tool: string, list: string): boolean =>
-  list
-    .split(',')
-    .map(s => s.trim())
-    .filter(Boolean)
-    .some(p => (p.endsWith('*') ? tool.startsWith(p.slice(0, -1)) : tool === p))
 
 // Bash is routed only when the command reads (cat, head, grep, curl and the like) and every program in it is a reader or a
 // harmless helper. Builds, tests, git and scripts print what they print and are never touched.
@@ -356,7 +350,7 @@ export const register: Register = (on, options) => {
     if (e.tool === 'Read' && routed.has(String((e as unknown as { file_path?: string }).file_path))) {
       void ledger($, { mod: 'trim-output', kind: 'reread', source: String((e as unknown as { file_path?: string }).file_path) })
     }
-    if (s.enabled && matchesTool(String(e.tool), s.tools) && (e.tool !== 'Bash' || isReadCommand(command))) {
+    if (s.enabled && matchesOutputTool(String(e.tool), s.tools) && (e.tool !== 'Bash' || isReadCommand(command))) {
       calls.set(e.tool_use_id, describe(e as unknown as Record<string, unknown>))
       if (calls.size > 200) calls.delete(calls.keys().next().value as string)
     }

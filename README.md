@@ -46,7 +46,30 @@ Needs Claude Code 2.1.311 or newer.
 - `agent-model-picker` records every decision but does not retry a failed cheaper subagent on a stronger model.
 - `dedupe-reads` compares file text, so an edited file is always read whole; its memory is cleared on compaction.
 - Each plugin is installed alone, so each carries its own copy of `shared/shared.ts`. After editing it, run `sh tools/sync-shared.sh`; `sh tools/sync-shared.sh --check` fails if a copy has drifted.
-- Not yet tested in a long live session. `test-output-trim` has unit tests (`claude plugin test mods/test-output-trim`); the other plugins do not.
+- Not yet tested in a long live session. Automated regressions cover output-routing ownership, test-log persistence, and test-output trimming; other plugin behaviors still need live acceptance.
+
+
+## Before you enable the pack
+
+- **Web result ownership:** `trim-web` exclusively handles `WebSearch`, `WebFetch` and MCP tool names containing `search`, `fetch`, `scrape`, `crawl` or `browse`. `trim-output` skips those results even when its tool list contains `mcp__*` or `WebFetch`. Turning off `trim-web` leaves those results untouched.
+- **Recoverability:** `test-output-trim` only replaces test output after the complete original has been written successfully to a uniquely named local log. A failed write leaves the original result unchanged.
+- **Platform notes:** `trim-shots` requires macOS `sips` and falls back to the original image elsewhere. `chat-handoff` uses Claude Code's clipboard API and reports when copying is unavailable.
+- **Safety:** Summaries and image resizing are lossy. Disable the relevant mod when auditing exact commands, logs, source text, or screenshots. Redaction matches known secret patterns but is not a comprehensive data-loss-prevention boundary. Do not use the summarizer for sensitive connector results without validating its privacy requirements.
+- **Savings:** The ledger estimates text tokens using four characters per token and deducts subsequent re-reads. Helper input and output tokens are listed separately. It does **not** establish billed token savings or monetary savings; prompt caching, pricing tiers and retries change actual cost.
+
+## Release verification
+
+The CI workflow validates the marketplace and every plugin, checks shared helper synchronization, and runs the pure-policy/log-handling regression tests and test-output trimming tests without live model calls. On a machine with Claude Code installed, run:
+
+```sh
+sh tools/sync-shared.sh --check
+claude plugin validate .
+for plugin in mods/*; do claude plugin validate "$plugin"; done
+claude plugin test mods/trim-output
+claude plugin test mods/test-output-trim
+```
+
+**Manual acceptance still required before a performance claim or wider promotion:** install `mahboobmonnamd@claude-mods` in Claude Code 2.1.311+, run a long mixed read/web/test session, verify each mod's on/off switch, confirm that original test logs are recoverable, and compare actual token usage and answer quality with all mods disabled. These live-session and billing measurements have not been completed.
 
 ## Data
 

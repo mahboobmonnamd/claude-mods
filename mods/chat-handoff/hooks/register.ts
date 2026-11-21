@@ -37,10 +37,10 @@ export const register: Register = on => {
     const stamp = new Date(await $.clock.now()).toISOString().slice(0, 19).replace(/[T:]/g, '-')
     const file = `${await dataDir($)}/handoffs/${stamp}.md`
     await appendLine($, file, text)
-    const copied = await $.process.run(['/usr/bin/pbcopy'], { stdin: text, timeoutMs: 5000 }).catch(() => undefined)
+    const copied = await $.ui.copy({ text }).catch(() => undefined)
     await ledger($, { mod: PLUGIN, kind: 'event', note: `handoff written (${fmt(text.length / 4)} tokens)`, helper: { model: 'fork', in: r.usage.input_tokens + (r.usage.cache_read_input_tokens ?? 0), out: r.usage.output_tokens } })
     return {
-      text: `Handoff saved to ${file}${copied?.exitCode === 0 ? ' and copied' : ''}. Start a fresh chat and paste it as the first message.\n\n${text}`,
+      text: `Handoff saved to ${file}${copied?.isCopied ? ' and copied' : ''}. Start a fresh chat and paste it as the first message.\n\n${text}`,
     }
   })
 
