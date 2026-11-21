@@ -28,6 +28,27 @@ jobs:
           for plugin in mods/*; do
             claude plugin validate "$plugin"
           done
+      - name: Smoke-test bundle and automatic dependencies
+        run: |
+          claude plugin marketplace add .
+          claude plugin install mahboobmonnamd@claude-mods
+          claude plugin list --json > "$RUNNER_TEMP/plugins.json"
+          node - "$RUNNER_TEMP/plugins.json" <<'NODE'
+          const fs = require('node:fs')
+          const plugins = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))
+          const expected = [
+            'mahboobmonnamd', 'trim-output', 'trim-web', 'trim-shots',
+            'effort-tuner', 'agent-model-picker', 'cache-timer', 'chat-handoff',
+            'switches', 'savings-meter', 'dedupe-reads', 'test-output-trim', 'cost-ledger',
+          ]
+          const missing = expected.filter(name => !plugins.some(
+            p => p.id === name + '@claude-mods' && p.enabled && !(p.errors || []).length,
+          ))
+          if (missing.length) {
+            console.error('Bundle failed to install: ' + missing.join(', '))
+            process.exitCode = 1
+          }
+          NODE
       - name: Run isolated mod regression tests
         run: |
           claude plugin test mods/trim-output
