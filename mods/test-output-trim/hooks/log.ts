@@ -13,7 +13,7 @@ if ! cat > "$f"; then
   exit 1
 fi
 mv "$f" "$f.log"
-printf '%s\\n' "$f.log"
+printf '%s\n' "$f.log"
 `
 
 const CLEANUP = `
@@ -29,7 +29,7 @@ export async function writeFullTestLog(dir: string, text: string, run: Run): Pro
     const written = await run(['/bin/sh', '-c', WRITE, 'sh', dir], { stdin: text, timeoutMs: 10_000 })
     if (written.exitCode !== 0) return undefined
     const path = written.stdout.trim()
-    if (!path.startsWith(`${dir}/test-`) || !path.endsWith('.log') || path.includes('\\n')) return undefined
+    if (!path.startsWith(`${dir}/test-`) || !path.endsWith('.log') || path.includes('\n')) return undefined
 
     // Retention is best effort; losing a cleanup step must not lose this log.
     try {
